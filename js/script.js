@@ -104,7 +104,7 @@ const certainInfo = (repoCurrentData, arrLanguages) => {
     // Create div
     const div = document.createElement("div");
     div.innerHTML =
-        `<h3>Name: ${repoCurrentData.name}</h3>
+    `<h3>Name: ${repoCurrentData.name}</h3>
     <p>Description: ${repoCurrentData.description}</p>
     <p>Default Branch: ${repoCurrentData.default_branch}</p>
     <p>Languages: ${arrLanguages.join(", ")}</p>
@@ -115,9 +115,9 @@ const certainInfo = (repoCurrentData, arrLanguages) => {
 
 // Add click event to the back button
 btnBackToRepo.addEventListener("click", () => {
-    console.log("Clicked!");
     secRepoList.classList.remove("hide");
-    secRepoData.classList.remove("hide");
+    secRepoData.classList.add("hide");
+    btnBackToRepo.classList.add("hide");
 });
 
 // Add input event for dynamic search
