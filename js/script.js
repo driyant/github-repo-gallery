@@ -37,7 +37,7 @@ const fetchData = (dataInfo) => {
 const fetchRepoList = async() => {
     const url = `https://api.github.com/users/${username}/repos?sort=updated&per_page=100`;
     const res = await fetch(url);
-    const dataRepo = await res.json();\
+    const dataRepo = await res.json();
     // Call display function
     displayRepo(dataRepo);
 }
