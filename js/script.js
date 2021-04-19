@@ -2,6 +2,10 @@
 const divOverview = document.querySelector(".overview");
 // Target ul.repo-list
 const ulRepoList = document.querySelector(".repo-list");
+// Target li.repos
+const secRepoList = document.querySelector(".repos");
+// Target section.repo-data
+const secRepoData = document.querySelector(".repo-data");
 // Global var, add github username
 const username = 'driyant';
 
@@ -49,8 +53,55 @@ const displayRepo = (dataRepo) => {
     for(const repoItem of dataRepo) {
         //console.log(repoItem);
         const el = document.createElement("li");
-        el.classList.add("repos");
+        el.classList.add("repo");
         el.innerHTML = `<h3>${repoItem.name}</h3>`;
         ulRepoList.appendChild(el);
     }
+}
+
+// Add event listener for ul click
+ulRepoList.addEventListener("click", (event) => {
+    // Check if it matches with h3
+    if(event.target.matches("h3")) {
+       // console.log("Match!");
+        const repoName = event.target.innerText;
+        // console.log(repoName);
+        certainRepo(repoName);
+    }
+});
+
+
+// Create function to spesific repo
+const certainRepo = async(repoName) => {
+    const url = `https://api.github.com/repos/${username}/${repoName}`;
+    const repoInfo = await fetch(url);
+    const repoCurrentData = await repoInfo.json();
+    //console.log(repoCurrentData);
+    const fetchLanguageUrl = repoCurrentData.languages_url;
+    // looping list the languages.url
+    // fetch lang data
+    const fetchLanguage = await fetch(fetchLanguageUrl);
+    const languageData = await fetchLanguage.json();
+   // create an empty array
+   const arrLanguages = [];
+   for (const languagesItem in languageData) {
+       arrLanguages.push(languagesItem);
+   }
+   certainInfo(repoCurrentData,arrLanguages);
+}
+
+// Create an array of languages
+const certainInfo = (repoCurrentData,arrLanguages) => {
+    secRepoData.innerHTML = "";
+    secRepoData.classList.remove("hide");
+    secRepoList.classList.add("hide");
+    // Create div
+    const div = document.createElement("div");
+    div.innerHTML =
+    `<h3>Name: ${repoCurrentData.name}</h3>
+    <p>Description: ${repoCurrentData.description}</p>
+    <p>Default Branch: ${repoCurrentData.default_branch}</p>
+    <p>Languages: ${arrLanguages.join(", ")}</p>
+    <a class="visit" href="${repoCurrentData.html_url}" target="_blank" rel="noreferrer noopener">View Repo on GitHub!</a>`;
+    secRepoData.appendChild(div);
 }
