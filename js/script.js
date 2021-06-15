@@ -103,9 +103,10 @@ const certainInfo = (repoCurrentData, arrLanguages) => {
     secRepoList.classList.add("hide");
     // Create div
     const div = document.createElement("div");
+    const repoDesc = repoCurrentData.description;
     div.innerHTML =
     `<h3>Name: ${repoCurrentData.name}</h3>
-    <p>Description: ${repoCurrentData.description}</p>
+    <p>Description: ${repoDesc === null ? 'No description' : repoDesc}</p>
     <p>Default Branch: ${repoCurrentData.default_branch}</p>
     <p>Languages: ${arrLanguages.join(", ")}</p>
     <a class="visit" href="${repoCurrentData.html_url}" target="_blank" rel="noreferrer noopener">View Repo on GitHub!</a>`;
