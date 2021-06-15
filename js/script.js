@@ -109,7 +109,7 @@ const certainInfo = (repoCurrentData, arrLanguages) => {
     <p>Description: ${repoDesc === null ? 'No description' : repoDesc}</p>
     <p>Default Branch: ${repoCurrentData.default_branch}</p>
     <p>Languages: ${arrLanguages.join(", ")}</p>
-    <a class="visit" href="${repoCurrentData.html_url}" target="_blank" rel="noreferrer noopener">View Repo on GitHub!</a>`;
+    <a class="visit" href="${repoCurrentData.html_url}" target="_blank">View Repo on GitHub!</a>`;
     secRepoData.appendChild(div);
     btnBackToRepo.classList.remove("hide");
 }
